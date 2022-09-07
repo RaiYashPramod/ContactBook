@@ -33,11 +33,6 @@ const Home = () => {
     }
 
     const handleEdit = async (contact) => {
-        // const resp = await fetch(`http://localhost:5000/api/contacts/${contact._id}`,{
-        //     headers: {
-        //         "Content-type": "application/json"
-        //     }
-        // })
         setName(contact.name);
         setPhone(contact.phone);
         setEmail(contact.email);
