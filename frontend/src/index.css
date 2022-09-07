@@ -1,0 +1,146 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&family=VT323&display=swap');
+
+/* layout */
+:root {
+  --primary: #1aac83;
+  --error: #e7195a;
+}
+body {
+  background: #333;
+  margin: 0;
+  font-family: "Poppins";
+}
+header {
+  background: rgb(30, 29, 29);
+}
+header .container {
+  margin: auto;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+header a {
+  color: #fff;
+  text-decoration: none;
+}
+.pages{
+  max-width: 1400px;
+  padding: 2px;
+  margin: 0 auto;
+}
+
+.home {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  gap: 100px;
+}
+
+.contact-card {
+  background: rgb(30, 29, 29);
+  border: 4px;
+  margin: 20px auto;
+  padding: 20px;
+  position: relative;
+  align-items: center;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
+}
+
+.contact-card h4 {
+  margin: 0 0 10px 0;
+  font-size: 2em;
+  color: var(--primary);
+}
+.contact-card pre {
+  margin: 0;
+  font-size: 1.2em;
+  color: rgb(198, 195, 195);
+  padding: .3em;
+}
+
+.icons span {
+  padding: auto;
+  color: #e7195a;
+  cursor: pointer;
+}
+
+.icons i{
+  padding-left: .9pc;
+  color: var(--primary);
+  cursor: pointer;
+}
+
+.create {
+  padding: 3pc;
+  width: 300px;
+  margin-top: 1pc;
+  margin-left: 30pc;
+  border-radius: 0.5pc;
+  /* box-shadow: 2px 2px 5px rgba(0,0,0,0.05); */
+}
+
+.update {
+  color: #ffefef;
+}
+
+.add {
+  color: #ffefef;
+  font-size: 4pc;
+  margin-bottom: 0pc;
+  margin-top: 2pc;
+  margin-left: 25pc;
+}
+
+label{
+  display: block;
+  color: #ffefef;
+}
+input {
+  display: block;
+  color: #fff;
+  background-color: gray;
+  padding: 10px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  width: 100%;
+  border: none;
+  border-radius: 4px;
+  box-sizing: border-box;
+  text-decoration: bold;
+  outline-style: none;
+}
+form button {
+  background: var(--primary);
+  border: 0;
+  color: #fff;
+  padding: 10px;
+  font-family: "Poppins";
+  border-radius: 0.5pc;
+  cursor: pointer;
+}
+
+
+.addButton {
+  background: var(--primary);
+  border: 0;
+  padding: 0.7rem;
+  font-family: "Poppins";
+  border-radius: 0.5pc;
+  cursor: pointer;
+}
+
+.text{
+  color: #fff;
+}
+
+div.error {
+  padding: 10px;
+  background: #ffefef;
+  border: 1px solid var(--error);
+  color: var(--error);
+  border-radius: 4px;
+  margin: 20px 0;
+}
+input.error {
+  border: 1px solid var(--error);
+}
