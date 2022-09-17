@@ -11,6 +11,7 @@ const contactSchema = new Schema({
         type: Number,
         required: true,
         unique: true,
+        max: 10000000000
     },
     email: {
         type: String,

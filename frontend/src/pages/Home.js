@@ -1,10 +1,8 @@
 import { useEffect,useState } from "react";
 import ContactCard from "../components/ContactCard";
 import {useContactContext} from "../hooks/useContactContext"
-// import UpdateContact from "./UpdateContact";
  
 const Home = () => {
-    // const [contacts, setContact] = useState([]);
     const { contacts, dispatch } = useContactContext()
     const [name, setName] = useState(""); 
     const [phone, setPhone] = useState(""); 
@@ -19,8 +17,8 @@ const Home = () => {
                     "Content-type": "application/json"
                 }
             });
-            const json = await response.json()
-            // setContact(await response.json());
+            const json = await response.json();
+
             if (response.ok) {
                 dispatch({ type: "SET_CONTACT", payload: json })
             }
@@ -33,10 +31,9 @@ const Home = () => {
         const response = await fetch(`http://localhost:5000/api/contacts/${_id}`,{
             method: 'DELETE',
         })
+
         const json = await response.json();
-        console.log(json);
-        // console.log(response)
-        // fetchContacts()
+
         if (response.ok) {
             dispatch({type: 'DELETE_CONTACT', payload: json})
         }
@@ -54,7 +51,6 @@ const Home = () => {
         setName(contact.name);
         setPhone(contact.phone);
         setEmail(contact.email);
-        // navigate(`/single`)
     }
 
     const updateContact = async(contact) => {
@@ -64,7 +60,6 @@ const Home = () => {
             headers: {
                 "Content-type": "application/json"
             },
-            body: JSON.stringify()
         })
     }
 

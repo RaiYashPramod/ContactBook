@@ -36,7 +36,6 @@ const AddContact = () => {
             setPhone('')
             setEmail('')
             setEmptyFields([])
-            console.log(json);
             dispatch({type: 'CREATE_CONTACT', payload: json});
             dispatch({type: 'REDIRECT', payload: navigate('/')});
         }
@@ -53,6 +52,7 @@ const AddContact = () => {
                 <input type="Number" onChange={(e) => setPhone(e.target.value)} value={phone} className={emptyFields.includes('phone') ? 'error' : ''} />
                 <label>Email:</label>
                 <input type="text" onChange={(e) => setEmail(e.target.value)} value={email} className={emptyFields.includes('email') ? 'error' : ''} />
+
                 <button>Add Contact</button>
                 {error && <div className="error">{error}</div>}
             </form>
