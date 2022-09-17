@@ -19,7 +19,7 @@ router.get('/:id', getContact);
 router.post('/add', createContact);
 
 //Update a existing contact with partial data
-router.patch('/:id', updateContact);
+router.put('/:id', updateContact);
 
 //Delete any cintact from the db
 router.delete('/:id', deleteContact);

@@ -1,13 +1,15 @@
 import { useState } from "react"
+import { useContactContext } from "../hooks/useContactContext";
 import { useNavigate } from "react-router-dom";
 
 const AddContact = () => {
-    const navigate = useNavigate();
+    const { dispatch } = useContactContext();
     const [name, setName] = useState("");
     const [phone, setPhone] = useState("");
     const [email, setEmail] = useState("");
     const [emptyFields, setEmptyFields] = useState([]);
     const [error, setError] = useState(null);
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -23,7 +25,6 @@ const AddContact = () => {
         })
 
         const json = await response.json();
-        console.log(json);
 
         if (!response.ok) {
             setError(json.error)
@@ -35,7 +36,9 @@ const AddContact = () => {
             setPhone('')
             setEmail('')
             setEmptyFields([])
-            navigate('/')
+            console.log(json);
+            dispatch({type: 'CREATE_CONTACT', payload: json});
+            dispatch({type: 'REDIRECT', payload: navigate('/')});
         }
     }
 

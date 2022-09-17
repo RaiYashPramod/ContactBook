@@ -21,32 +21,36 @@ const getContact = async (req, res) => {
 }
 
 const createContact = async (req, res) => {
-    const {name, phone, email} = req.body;
+    try {
+        const {name, phone, email} = req.body;
 
-    let emptyFields = [];
+        let emptyFields = [];
 
-    if(!name){
-        emptyFields.push('name');
+        if(!name){
+            emptyFields.push('name');
+        }
+
+        if(!phone) {
+            emptyFields.push('phone');
+        }
+
+        if(!email) {
+            emptyFields.push('email');
+        }
+
+        // if(!address) {
+        //     emptyFields.push('address');
+        // }
+
+        if(emptyFields.length > 0) {
+            res.status(400).json({ error:'Please fill all the necessary fields', emptyFields });
+        }
+
+        const newContact = await Contact.create({ name, phone, email });
+        return res.status(200).json(newContact);
+    } catch (err) {
+        console.log(err);
     }
-
-    if(!phone) {
-        emptyFields.push('phone');
-    }
-
-    if(!email) {
-        emptyFields.push('email');
-    }
-
-    // if(!address) {
-    //     emptyFields.push('address');
-    // }
-
-    if(emptyFields.length > 0) {
-        res.status(400).json({ error:'Please fill all the necessary fields', emptyFields });
-    }
-
-    const newContact = await Contact.create({ name, phone, email });
-    return res.status(200).json(newContact);
 }
 
 const updateContact = async (req, res) => {

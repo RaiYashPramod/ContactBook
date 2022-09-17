@@ -1,51 +1,70 @@
 import { useEffect,useState } from "react";
 import ContactCard from "../components/ContactCard";
+import {useContactContext} from "../hooks/useContactContext"
 // import UpdateContact from "./UpdateContact";
  
 const Home = () => {
-    const [contacts, setContact] = useState([]);
+    // const [contacts, setContact] = useState([]);
+    const { contacts, dispatch } = useContactContext()
     const [name, setName] = useState(""); 
     const [phone, setPhone] = useState(""); 
     const [email, setEmail] = useState(""); 
 
-    const fetchContacts = async() => {
-        const response = await fetch('http://localhost:5000/api/contacts/',{
-            headers: {
-                "Content-type": "application/json"
-            }
-        });
-        setContact(await response.json());
-    }
+    
     
     useEffect(() => {
-      fetchContacts()
-    }, [])
+        const fetchContacts = async() => {
+            const response = await fetch('http://localhost:5000/api/contacts/',{
+                headers: {
+                    "Content-type": "application/json"
+                }
+            });
+            const json = await response.json()
+            // setContact(await response.json());
+            if (response.ok) {
+                dispatch({ type: "SET_CONTACT", payload: json })
+            }
+        }
+
+        fetchContacts()
+    }, [dispatch])
 
     const deleteContact = async(_id) => {
         const response = await fetch(`http://localhost:5000/api/contacts/${_id}`,{
             method: 'DELETE',
-            headers: {
-                "Content-Type": "application/json"
-            }
         })
-        console.log(response)
-        fetchContacts()
+        const json = await response.json();
+        console.log(json);
+        // console.log(response)
+        // fetchContacts()
+        if (response.ok) {
+            dispatch({type: 'DELETE_CONTACT', payload: json})
+        }
     }
+    // const singleContact = async (_id) => {
+    //     const response = await fetch(`http://localhost:5000/api/contacts/${_id}`,{
+    //         method: 'patch',
+    //         headers: {
+    //             "Content-Type": "application/json"
+    //         }
+    //     })
+    // }
 
     const handleEdit = async (contact) => {
         setName(contact.name);
         setPhone(contact.phone);
         setEmail(contact.email);
+        // navigate(`/single`)
     }
 
-    const updateContact = async(e) => {
-        e.preventDefault();
-
-        const response = await fetch('http://localhost:5000/api/contacts/', {
-            method: 'PATCH',
+    const updateContact = async(contact) => {
+        contact.preventDefault();
+        const response = await fetch(`http://localhost:5000/api/contacts/${contact._id}`, {
+            method: 'GET',
             headers: {
                 "Content-type": "application/json"
-            }
+            },
+            body: JSON.stringify()
         })
     }
 
@@ -73,14 +92,14 @@ const Home = () => {
             </div>
             <div className="form">
                 <h3 className="update">Update Contact</h3>
-                <form className="update" onSubmit={() => updateContact(contacts)}>
+                <form className="update" >
                     <label>Name:</label>
                     <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
                     <label>Phone No.:</label>
                     <input type="Number" value={phone} onChange={(e) => setPhone(e.target.value)} />
                     <label>Email:</label>
                     <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} />
-                    <button>Update Contact</button>
+                    <button onClick={(contact) => updateContact(contact)}>Update Contact</button>
                     {/* {error && <div className="error">{error}</div>} */}
                 </form>
             </div>
